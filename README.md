@@ -1,0 +1,2 @@
+# Black-White
+for Hyprland
