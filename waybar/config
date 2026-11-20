@@ -1,0 +1,140 @@
+{
+    "layer": "top", // Waybar at top layer
+    "position": "top", // Waybar position (top|bottom|left|right)
+    "height": 32, // Waybar height
+    // "width": 120, // Waybar width
+    // Choose the order of the modules
+    "modules-left": ["custom/bluetooth", "hyprland/workspaces"],
+    "modules-center": ["hyprland/window"],
+    "modules-right": ["pulseaudio", "network", "cpu", "memory", "temperature", "backlight", "battery", "clock", "group/power"],
+    // Modules configuration
+     "hyprland/workspaces": {
+         "disable-scroll": false,
+         "disable-markup" : false,
+         "all-outputs": true,
+         "format": "  {icon}  ",
+         //"format":"{icon}",
+         "format-icons": {
+             "1": "1",
+             "2": "2",
+             "3": "3",
+             "10": "10",
+             "4": "4",
+             "5": "5",
+         }
+     },
+    "hyprland/mode": {
+        "format": "<span style=\"italic\">{}</span>"
+    },
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "",
+            "deactivated": ""
+        }
+    },
+    "custom/bluetooth": {
+	"format":"ᖳᖰ",
+	"on-click": "blueman-manager",
+    },
+    "group/power": {
+        "orientation": "inherit",
+        "drawer": {
+            "transition-duration": 400,
+            "transition-left-to-right": false,
+            "click-to-reveal": true,
+            "children-class": "power-child"
+        },
+        "modules": ["custom/power", "custom/suspend", "custom/logout", "custom/reboot", "custom/shutdown"]
+    },
+    "custom/power": {
+        "format": "",
+        "tooltip": false
+    },
+    "custom/suspend": {
+        "format": "",
+        "tooltip-format": "Сон",
+        "tooltip": true,
+        "on-click": "systemctl suspend"
+    },
+    "custom/logout": {
+        "format": "",
+        "tooltip-format": "Выйти из сессии",
+        "tooltip": true,
+        "on-click": "loginctl terminate-user $USER"
+    },
+    "custom/reboot": {
+        "format": "",
+        "tooltip-format": "Перезагрузка",
+        "tooltip": true,
+        "on-click": "systemctl reboot"
+    },
+    "custom/shutdown": {
+        "format": "",
+        "tooltip-format": "Выключить",
+        "tooltip": true,
+        "on-click": "systemctl poweroff"
+    },
+    "tray": {
+        "icon-size": 21,
+        "spacing": 10
+    },
+    "clock": {
+        "format": "{:%I:%M %p}",
+        "format-alt": "{:%d-%m-%Y}",
+    },
+    "cpu": {
+        "format": "{usage}% "
+    },
+    "memory": {
+        "format": "{}% "
+    },
+    "temperature": {
+        // "thermal-zone": 2,
+        // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+        "critical-threshold": 80,
+        // "format-critical": "{temperatureC}°C ",
+        "format": "{temperatureC}°C "
+    },
+    "backlight": {
+        // "device": "acpi_video1",
+        "format": "{percent}% {icon}",
+        "states": [0,50],
+        "format-icons": ["", ""]
+    },
+    "battery": {
+        "states": {
+            "good": 95,
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{capacity}% {icon}",
+        // "format-good": "", // An empty format will hide the module
+        // "format-full": "",
+        "format-icons": ["", "", "", "", ""]
+    },
+    "network": {
+        // "interface": "wlp2s0", // (Optional) To force the use of this interface
+        "format-wifi": "{essid} ({signalStrength}%) ",
+        "format-ethernet": "{ifname}: {ipaddr}/{cidr} ",
+        "format-disconnected": "Disconnected ⚠",
+        "interval" : 7,
+        "on-click": "kitty -e nmtui"
+    },
+    "pulseaudio": {
+        //"scroll-step": 1,
+        "format": "{volume}% {icon}",
+        "format-bluetooth": "{volume}% {icon}",
+        "format-muted": "",
+        "format-icons": {
+            "headphones": "",
+            "handsfree": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", ""]
+        },
+        "on-click": "pavucontrol"
+    }
+}
